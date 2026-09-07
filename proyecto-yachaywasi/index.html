@@ -1318,7 +1318,7 @@ function kwPublishPost(){
 }
 
 // Corrector de tildes con el diccionario ampliado (comprensión, frustración, increíble, sufijos -ción, esdrújulas y más)
-function kwAiAssist(){
+async function kwAiAssist(){
   const contentArea = document.getElementById('kw-content');
   const content = contentArea.value.trim();
   const box = document.getElementById('kw-ai-box');
@@ -1331,102 +1331,27 @@ function kwAiAssist(){
   box.classList.add('visible');
   box.innerHTML = '<span class="kw-ai-loading">✨ Mejorando tildes y redacción con IA...</span>';
 
-  setTimeout(() => {
-    let improved = content;
-
-    // 1. Limpieza de espacios múltiples
-    improved = improved.replace(/\s+/g, ' ');
-
-    // 2. Diccionario masivo con más de 1000 variaciones comunes de tildación en español
-    const tildesMap = [
-      // Términos solicitados explícitamente
-      { find: /\bcomprension\b/gi, replace: 'comprensión' },
-      { find: /\bfrustracion\b/gi, replace: 'frustración' },
-      { find: /\bincreible\b/gi, replace: 'increíble' },
-
-      // Pronombres, adverbios y diacríticos frecuentes
-      { find: /\bse\s+que\b/gi, replace: 'sé que' },
-      { find: /\bmas\b/gi, replace: 'más' },
-      { find: /\bestan\b/gi, replace: 'están' },
-      { find: /\bestuvo\b/gi, replace: 'estuvo' },
-      { find: /\btambien\b/gi, replace: 'también' },
-      { find: /\bademas\b/gi, replace: 'además' },
-      { find: /\bdia\b/gi, replace: 'día' },
-      { find: /\bdias\b/gi, replace: 'días' },
-      { find: /\basi\b/gi, replace: 'así' },
-      { find: /\baqui\b/gi, replace: 'aquí' },
-      { find: /\balli\b/gi, replace: 'allí' },
-      { find: /\balla\b/gi, replace: 'allá' },
-      { find: /\bahi\b/gi, replace: 'ahí' },
-      { find: /\brapido\b/gi, replace: 'rápido' },
-      { find: /\bfacil\b/gi, replace: 'fácil' },
-      { find: /\bdificil\b/gi, replace: 'difícil' },
-      { find: /\bcomun\b/gi, replace: 'común' },
-      { find: /\bpublico\b/gi, replace: 'público' },
-      { find: /\brio\b/gi, replace: 'río' },
-      { find: /\bquien\b/gi, replace: 'quién' },
-      { find: /\bcual\b/gi, replace: 'cuál' },
-      { find: /\bcuales\b/gi, replace: 'cuáles' },
-
-      // Sufijos comunes en -ión, -sión y sus plurales (-ciones, -siones)
-      { find: /\baccion\b/gi, replace: 'acción' },
-      { find: /\bacciones\b/gi, replace: 'acciones' },
-      { find: /\bsolucion\b/gi, replace: 'solución' },
-      { find: /\bsoluciones\b/gi, replace: 'soluciones' },
-      { find: /\binformacion\b/gi, replace: 'información' },
-      { find: /\bcomunicacion\b/gi, replace: 'comunicación' },
-      { find: /\beducacion\b/gi, replace: 'educación' },
-      { find: /\borganizacion\b/gi, replace: 'organización' },
-      { find: /\bsituacion\b/gi, replace: 'situación' },
-      { find: /\bgeneracion\b/gi, replace: 'generación' },
-      { find: /\bparticipacion\b/gi, replace: 'participación' },
-      { find: /\bcooperacion\b/gi, replace: 'cooperación' },
-      { find: /\bdecision\b/gi, replace: 'decisión' },
-      { find: /\bdiscusion\b/gi, replace: 'discusión' },
-      { find: /\bexplicacion\b/gi, replace: 'explicación' },
-      { find: /\bpreocupacion\b/gi, replace: 'preocupación' },
-      { find: /\bcreacion\b/gi, replace: 'creación' },
-      { find: /\brelacion\b/gi, replace: 'relación' },
-      { find: /\brelaciones\b/gi, replace: 'relaciones' },
-      { find: /\bcondicion\b/gi, replace: 'condición' },
-      { find: /\bcondiciones\b/gi, replace: 'condiciones' },
-      { find: /\bintencion\b/gi, replace: 'intención' },
-      { find: /\bconversacion\b/gi, replace: 'conversación' },
-      { find: /\borigin\b/gi, replace: 'origen' },
-
-      // Esdrújulas y adverbios en -mente
-      { find: /\bminimo\b/gi, replace: 'mínimo' },
-      { find: /\bmaximo\b/gi, replace: 'máximo' },
-      { find: /\bultimo\b/gi, replace: 'último' },
-      { find: /\brapidamente\b/gi, replace: 'rápidamente' },
-      { find: /\bfacilmente\b/gi, replace: 'fácilmente' },
-      { find: /\bdificilmente\b/gi, replace: 'difícilmente' },
-      { find: /\bcaracter\b/gi, replace: 'carácter' },
-      { find: /\bcomunicandose\b/gi, replace: 'comunicándose' },
-
-      // Estructuras interrogativas frecuentes
-      { find: /\bpor\s+que\b/gi, replace: 'por qué' },
-      { find: /\bque\s+pasa\b/gi, replace: 'qué pasa' },
-      { find: /\bque\s+tal\b/gi, replace: 'qué tal' },
-      { find: /\bcomo\s+estas\b/gi, replace: 'cómo estás' }
-    ];
-
-    tildesMap.forEach(item => {
-      improved = improved.replace(item.find, item.replace);
+  try {
+    const response = await fetch('/api/mejorar-ia', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content })
     });
 
-    // 3. Formateo de mayúsculas al inicio de oraciones
-    improved = improved.charAt(0).toUpperCase() + improved.slice(1);
-    improved = improved.replace(/([.?!])\s*([a-z])/g, (match, p1, p2) => p1 + ' ' + p2.toUpperCase());
-
-    // 4. Asegurar puntuación final
-    if (!/[.?!]$/.test(improved)) {
-      improved += '.';
+    if(!response.ok){
+      throw new Error('HTTP ' + response.status);
     }
+
+    const data = await response.json();
+    const improved = data.improved.trim();
 
     box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(improved) +
       '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(improved) + '">Usar esta versión</button>';
-  }, 700);
+
+  } catch (err) {
+    box.innerHTML = '<span class="kw-ai-loading">❌ No se pudo conectar con la IA. Intenta de nuevo en unos segundos.</span>';
+    console.error('Error al llamar al backend:', err);
+  }
 }
 
 function kwUseAiSuggestion(btn){
