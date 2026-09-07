@@ -26,15 +26,23 @@ export default async function handler(req, res) {
         'Authorization': 'Bearer ' + apiKey
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [
           {
             role: 'system',
-            content: 'Eres un corrector de textos académico en español, riguroso y minucioso. Tu tarea es corregir TODOS los errores del texto que te den, incluyendo: ortografía y tildes; puntuación; concordancia de género y número; conjugación de verbos; uso incorrecto de artículos antes de nombres propios (ejemplo: "la Luciana" debe quedar como "Luciana"); palabras mal escritas o inexistentes en español; y coherencia y cohesión (que las ideas se conecten bien y el texto se entienda con claridad). Corrige cualquier error por pequeño que sea, incluso en textos muy cortos o simples — no asumas que un texto corto no tiene errores. Mantén el sentido, la intención y la voz del autor; no agregues contenido nuevo ni cambies el significado. Responde ÚNICAMENTE con el texto corregido, sin explicaciones, sin comillas y sin comentarios adicionales.'
+            content: 'Eres un corrector de textos académico en español, extremadamente riguroso y minucioso, tipo profesor de lengua. Corrige TODOS los errores del texto que te den, sin dejar pasar ninguno, incluyendo: 1) Mayúscula al inicio de cada oración y en TODOS los nombres propios de persona, lugar u objeto (ejemplo: "luciana" → "Luciana"). 2) Tildes, incluyendo las de palabras que cambian de significado según la tilde: se/sé, tu/tú, el/él, mi/mí, si/sí, mas/más, de/dé, solo si es adverbio, aun/aún. Revisa cada palabra de este tipo con cuidado. 3) Puntuación: comas después de saludos o conectores (ejemplo: "Hola, soy..."), puntos finales, signos de interrogación y exclamación de apertura y cierre (¿?, ¡!). 4) Concordancia de género, número y conjugación verbal. 5) Artículos innecesarios antes de nombres propios ("la Luciana" → "Luciana"). 6) Palabras mal escritas o inexistentes en español. 7) Coherencia y cohesión: que las ideas conecten bien y el texto se entienda con claridad. Corrige incluso en textos muy cortos o simples: un texto corto casi siempre tiene errores de tildes, mayúsculas o puntuación que debes encontrar. Mantén el sentido, la intención y la voz del autor; no agregues contenido nuevo. Responde ÚNICAMENTE con el texto corregido, sin explicaciones, sin comillas y sin comentarios adicionales.'
+          },
+          {
+            role: 'user',
+            content: 'hola soy luciana y no se escribir'
+          },
+          {
+            role: 'assistant',
+            content: 'Hola, soy Luciana y no sé escribir.'
           },
           { role: 'user', content: content }
         ],
-        temperature: 0.2,
+        temperature: 0,
         max_tokens: 800
       })
     });
