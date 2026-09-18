@@ -1,0 +1,86 @@
+YACHAY WASI — CÓMO PUBLICAR Y ACTUALIZAR
+=========================================
+
+CONTENIDO DE ESTA CARPETA:
+
+  index.html                 → tu página web completa
+  package.json               → dependencias (@vercel/kv, nodemailer)
+  vercel.json                → configuración del proyecto
+  CAMBIOS.txt                → qué se arregló en esta versión
+  api/mejorar-ia.js          → corrige tildes/redacción con OpenAI
+  api/usuarios.js            → crea/ingresa profesores y estudiantes
+  api/alumnos.js             → alumnos de un profesor + progreso detallado
+  api/progreso.js            → guarda el avance, los intentos y el cuento
+  api/publicaciones.js       → tablón de la comunidad compartido
+  api/enviar-registro.js     → envía el registro al correo del profesor
+
+Todo (usuarios, progreso y tablón) vive ahora en Vercel KV, no en el
+navegador. Por eso funciona desde cualquier celular o computadora, y por
+eso el profesor/a puede ver lo que hacen y publican sus alumnos.
+
+IMPORTANTE: los archivos de la carpeta "api" deben quedar dentro de una
+carpeta llamada exactamente "api", al lado del index.html. Si quedan
+sueltos en la raíz, Vercel no los reconoce como funciones y la página
+dará error 404 al guardar progreso o publicar.
+
+
+CÓMO SUBIRLO A GITHUB
+----------------------
+Opción sencilla (desde la web de GitHub):
+ 1. Entra a tu repositorio de Yachay Wasi en github.com
+ 2. Botón "Add file" → "Upload files"
+ 3. Arrastra el index.html, package.json y vercel.json a la ventana.
+ 4. Sube los de la carpeta api por separado: entra primero a la carpeta
+    "api" del repositorio y ahí usa "Add file" → "Upload files".
+    (Si arrastras la carpeta completa, GitHub respeta la estructura.)
+ 5. Abajo escribe un mensaje como "Arreglo panel del profesor y tablón"
+    y dale a "Commit changes".
+ 6. Vercel detecta el cambio solo y vuelve a desplegar en 1–2 minutos.
+
+Opción con Git (desde tu computadora):
+    git add .
+    git commit -m "Arreglo panel del profesor y tablón compartido"
+    git push
+
+Opción sin GitHub: arrastra esta carpeta completa a Vercel con
+"choose a folder", igual que hiciste la primera vez.
+
+
+VARIABLES DE ENTORNO (ya deberías tenerlas)
+--------------------------------------------
+En Vercel → Settings → Environment Variables:
+
+  OPENAI_API_KEY      = tu API key de OpenAI
+  GMAIL_USER          = tu correo completo de Gmail
+  GMAIL_APP_PASSWORD  = la contraseña de aplicación de 16 letras
+
+Las variables de Vercel KV (KV_REST_API_URL, KV_REST_API_TOKEN, etc.) se
+agregan solas al conectar la base de datos desde la pestaña "Storage".
+
+Esta actualización NO necesita variables nuevas.
+
+
+CÓMO PROBAR QUE QUEDÓ BIEN
+---------------------------
+ 1. Entra como alumno con el código de clase, lee una historia y falla
+    a propósito una pregunta antes de acertar.
+ 2. Publica un cuento en el Tablón de la comunidad.
+ 3. Entra como profesor/a desde otro dispositivo o pestaña de incógnito.
+ 4. En "Panel del profesor/a" abre la fila del alumno: debe mostrar el
+    nombre del cuento, la parte, los intentos (1 o 2) y si acertó.
+ 5. Más abajo, en "Historias publicadas por tus alumnos", debe aparecer
+    el cuento que publicó.
+ 6. Dale a "Enviar registro a mi correo" y revisa tu bandeja de entrada.
+
+
+NOTAS
+------
+- La clave del profesor se guarda en texto plano en Vercel KV. Está bien
+  para un proyecto escolar, pero no para datos sensibles reales.
+- El progreso guardado antes de esta actualización no tiene título de
+  cuento ni intentos; aparecerá con el id de la historia y 1 intento.
+  Los registros nuevos salen completos.
+- Las historias publicadas antes vivían en el navegador de cada alumno y
+  no se pueden recuperar. Tendrán que volver a publicarlas.
+- Nunca subas tu API key de OpenAI ni la contraseña de aplicación de
+  Gmail a un repositorio público. Solo van en Vercel.

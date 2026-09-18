@@ -1,0 +1,70 @@
+QUÉ SE CAMBIÓ Y CÓMO SUBIRLO
+=============================
+
+ARCHIVOS QUE DEBES REEMPLAZAR EN TU REPOSITORIO DE GITHUB:
+
+  index.html                 (raíz del proyecto)
+  api/progreso.js            (reemplazar)
+  api/alumnos.js             (reemplazar)
+  api/enviar-registro.js     (reemplazar)
+  api/publicaciones.js       (NUEVO — no existía antes)
+
+No hace falta tocar package.json, vercel.json, api/usuarios.js ni
+api/mejorar-ia.js. Tampoco hay que agregar variables de entorno nuevas:
+todo usa la misma base de datos Vercel KV que ya tienes conectada.
+
+
+PROBLEMA 1 — El profesor solo veía "partes completadas"
+--------------------------------------------------------
+La causa: api/progreso.js guardaba únicamente usuario_id, historia_id,
+parte y completada. El título del cuento y los intentos NUNCA se
+guardaban, así que el panel no tenía de dónde sacarlos.
+
+Solución:
+ - index.html ahora envía también historia_titulo, intentos y acerto
+   cada vez que un alumno termina una parte.
+ - api/progreso.js guarda esos campos nuevos (y actualiza el registro
+   si ya existía, en lugar de ignorarlo).
+ - api/alumnos.js agrupa el progreso por cuento y devuelve el detalle.
+ - El panel del profesor ahora muestra, por cada alumno, una fila
+   desplegable con: nombre del cuento, número de parte, intentos usados
+   y si acertó o agotó los 2 intentos.
+ - El correo de "Enviar registro" incluye el mismo detalle.
+
+
+PROBLEMA 2 — El profesor no veía el Tablón de la comunidad
+-----------------------------------------------------------
+La causa: el tablón guardaba las publicaciones en localStorage, que es
+memoria privada de CADA navegador. Los alumnos veían solo lo suyo, y el
+profesor nunca veía nada de ellos.
+
+Solución:
+ - Se creó api/publicaciones.js, que guarda el tablón en Vercel KV
+   (igual que los usuarios y el progreso).
+ - Cada publicación se guarda con el profesorId de la clase del alumno.
+ - El tablón que ve un alumno es el de su clase; el profesor ve el mismo
+   tablón en la pestaña "Tablón de la comunidad" Y además una tarjeta
+   nueva en su panel: "Historias publicadas por tus alumnos".
+
+
+OJO CON LOS DATOS VIEJOS
+-------------------------
+El progreso que ya está guardado en la base de datos (de antes de este
+cambio) no tiene título de cuento ni intentos. Se mostrará con el id de
+la historia y 1 intento por defecto. Los datos nuevos salen completos.
+Si quieres empezar limpio, puedes borrar las claves "progreso" y
+"publicaciones" desde la pestaña Storage de Vercel.
+
+Las historias que los alumnos publicaron antes vivían en el navegador de
+cada uno, así que no se pueden recuperar. Tendrán que volver a publicar.
+
+
+PASOS
+------
+1. Sube/reemplaza los archivos en GitHub (o arrastra la carpeta a Vercel).
+2. Espera a que Vercel termine el despliegue.
+3. Prueba: entra como alumno desde el celular, lee una historia
+   respondiendo mal a propósito una pregunta, y publica un cuento.
+4. Entra como profesor desde otro dispositivo → "Panel del profesor/a".
+   Debes ver al alumno, abrir su detalle y ver el cuento con los
+   intentos, y más abajo su historia publicada.
