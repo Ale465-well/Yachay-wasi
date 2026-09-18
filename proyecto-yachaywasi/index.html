@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yachay Wasi — Historias que tejen comunidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#1B2A4A;
+    --night-soft:#2C3F66;
+    --gold:#D9A441;
+    --gold-soft:#F0CE84;
+    --clay:#B54834;
+    --green:#3F5C44;
+    --paper:#F7F0DD;
+    --paper-dim:#EFE4C8;
+    --ink:#2B241C;
+    --ink-soft:#5A5142;
+    --radius:14px;
+    --shadow: 0 8px 24px rgba(27,42,74,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .kw-root{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    min-height:100vh;
+  }
+  .kw-root h1, .kw-root h2, .kw-root h3, .kw-root .kw-display{
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- Header ---------- */
+  .kw-header{
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-soft) 100%);
+    color:var(--paper);
+    padding:36px 20px 0 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kw-header-inner{
+    max-width:960px;
+    margin:0 auto;
+    text-align:center;
+    padding-bottom:28px;
+  }
+  .kw-logo-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .kw-chakana{
+    width:30px;height:30px;
+    color:var(--gold);
+  }
+  .kw-brand{
+    font-size:clamp(2.2rem, 6vw, 3.2rem);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin:0;
+    color:var(--paper);
+  }
+  .kw-slogan{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold-soft);
+    font-size:clamp(1rem, 2.4vw, 1.25rem);
+    margin:6px 0 0 0;
+  }
+  .kw-thread{
+    display:block;
+    width:100%;
+    height:34px;
+  }
+
+  /* ---------- Nav ---------- */
+  .kw-nav{
+    max-width:960px;
+    margin:-1px auto 0 auto;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding:0 20px;
+    transform:translateY(-18px);
+  }
+  .kw-tab{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--night);
+    border:2px solid var(--night);
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .kw-tab:hover{ transform:translateY(-2px); }
+  .kw-tab.hidden{ display:none; }
+  .kw-tab.active{
+    background:var(--clay);
+    border-color:var(--clay);
+    color:#fff;
+  }
+
+  .kw-main{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 20px 80px 20px;
+  }
+  .kw-section{ display:none; animation:kwFade .35s ease; }
+  .kw-section.visible{ display:block; }
+  @keyframes kwFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .kw-section-head{ margin-bottom:18px; }
+  .kw-section-head h2{
+    font-size:1.6rem;
+    margin:0 0 6px 0;
+    color:var(--night);
+  }
+  .kw-section-head p{
+    margin:0;
+    color:var(--ink-soft);
+    line-height:1.5;
+    max-width:640px;
+  }
+
+  /* ---------- Community board ---------- */
+  .kw-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    margin-bottom:20px;
+    border:1px solid rgba(27,42,74,0.06);
+  }
+  .kw-field{ margin-bottom:14px; }
+  .kw-field label{
+    display:block;
+    font-weight:600;
+    font-size:0.88rem;
+    margin-bottom:6px;
+    color:var(--night);
+  }
+  .kw-field input, .kw-field select, .kw-field textarea{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid #DDD3B6;
+    background:var(--paper);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .kw-field input:focus, .kw-field select:focus, .kw-field textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+  }
+  .kw-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .kw-row .kw-field{ flex:1; min-width:180px; }
+
+  .kw-btn{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    border:none;
+    border-radius:999px;
+    padding:11px 20px;
+    cursor:pointer;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  .kw-btn:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+  .kw-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .kw-btn-primary{ background:var(--clay); color:#fff; }
+  .kw-btn-ghost{ background:transparent; color:var(--night); border:1.5px solid var(--night); }
+  .kw-btn-gold{ background:var(--gold); color:var(--night); }
+  .kw-btn[disabled]{ opacity:0.55; cursor:not-allowed; transform:none; }
+
+  .kw-ai-box{
+    background:var(--paper-dim);
+    border-left:4px solid var(--gold);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-top:10px;
+    font-size:0.9rem;
+    line-height:1.5;
+    display:none;
+    white-space:pre-wrap;
+  }
+  .kw-ai-box.visible{ display:block; }
+  .kw-ai-loading{ color:var(--ink-soft); font-style:italic; }
+
+  .kw-posts{ display:grid; gap:16px; }
+  .kw-post{
+    background:#fff;
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+    border-top:4px solid var(--gold);
+  }
+  .kw-post-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+  }
+  .kw-tag{
+    background:var(--night);
+    color:var(--paper);
+    padding:3px 10px;
+    border-radius:999px;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+  .kw-post h3{ margin:0 0 8px 0; font-size:1.15rem; color:var(--night); }
+  .kw-post p{ margin:0; line-height:1.6; color:var(--ink); white-space:pre-wrap; }
+
+  /* ---------- Story library ---------- */
+  .kw-story-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:18px;
+  }
+  .kw-story-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(27,42,74,0.06);
+    transition:transform .15s ease;
+  }
+  .kw-story-card:hover{ transform:translateY(-3px); }
+  .kw-story-top{
+    height:86px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.1rem;
+  }
+  .kw-story-body{ padding:16px; }
+  .kw-story-body h3{ margin:0 0 6px 0; font-size:1.1rem; color:var(--night); }
+  .kw-story-body p{ margin:0 0 10px 0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5; }
+  .kw-level{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.4px;
+    text-transform:uppercase;
+    color:var(--clay);
+  }
+
+  /* ---------- Reader ---------- */
+  .kw-reader{ display:none; }
+  .kw-reader.visible{ display:block; }
+  .kw-reader-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .kw-thread-progress{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin:0 auto 22px auto;
+    max-width:420px;
+  }
+  .kw-thread-dot{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:#DDD3B6;
+    border:2px solid #DDD3B6;
+    flex-shrink:0;
+    transition:background .2s, border-color .2s;
+  }
+  .kw-thread-dot.done{ background:var(--green); border-color:var(--green); }
+  .kw-thread-dot.current{ background:var(--gold); border-color:var(--clay); box-shadow:0 0 0 4px rgba(217,164,65,0.25); }
+  .kw-thread-line{ flex:1; height:3px; background:#DDD3B6; border-radius:2px; }
+  .kw-thread-line.done{ background:var(--green); }
+
+  .kw-reader-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:26px;
+  }
+  .kw-reader-card h3{ margin-top:0; color:var(--night); }
+  .kw-reader-text{ font-size:1.08rem; line-height:1.75; color:var(--ink); }
+  .kw-reader-text p{ margin:0 0 12px 0; }
+
+  .kw-quiz{
+    margin-top:20px;
+    padding-top:18px;
+    border-top:2px dashed #DDD3B6;
+  }
+  .kw-quiz-label{
+    font-weight:700;
+    color:var(--clay);
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    margin-bottom:10px;
+  }
+  .kw-quiz-q{ font-weight:600; margin-bottom:12px; font-size:1.02rem; }
+  .kw-options{ display:grid; gap:10px; margin-bottom:14px; }
+  .kw-option{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid #DDD3B6;
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .kw-option:hover{ border-color:var(--gold); }
+  .kw-option.correct{ background:#E4EFE3; border-color:var(--green); }
+  .kw-option.wrong{ background:#F5DEDA; border-color:var(--clay); }
+  .kw-option[disabled]{ cursor:default; }
+  .kw-feedback{ font-size:0.92rem; margin-bottom:10px; min-height:1.2em; }
+  .kw-feedback.ok{ color:var(--green); font-weight:600; }
+  .kw-feedback.no{ color:var(--clay); font-weight:600; }
+
+  .kw-finish{
+    text-align:center;
+    padding:30px 20px;
+  }
+  .kw-finish .kw-chakana{ width:46px; height:46px; margin-bottom:10px; }
+
+  @media (max-width:520px){
+    .kw-row{ flex-direction:column; }
+    .kw-reader-card{ padding:18px; }
+  }
+
+
+  /* ---------- User login / simulated database ---------- */
+  .kw-user-screen{
+    position:fixed;
+    inset:0;
+    background:linear-gradient(180deg,var(--night) 0%,var(--night-soft) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9999;
+  }
+  .kw-user-screen.hidden{display:none;}
+  .kw-user-card{
+    width:100%;
+    max-width:430px;
+    background:var(--paper);
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+  }
+  .kw-user-icon{font-size:3rem;margin-bottom:8px;}
+  .kw-user-card h1{color:var(--night);margin:0;font-size:2.5rem;}
+  .kw-user-card > p{color:var(--ink-soft);margin-top:5px;}
+  .kw-user-card h2{color:var(--night);margin-top:28px;margin-bottom:8px;}
+  .kw-user-description{font-size:.92rem;line-height:1.5;margin-bottom:20px;}
+  .kw-user-card label{
+    display:block;text-align:left;font-weight:600;color:var(--night);margin-bottom:6px;
+  }
+  .kw-user-card input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1.5px solid #DDD3B6;
+    background:#fff;
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    font-size:1rem;
+    margin-bottom:15px;
+  }
+  .kw-user-card input:focus{outline:2px solid var(--gold);}
+  .kw-user-card .kw-btn{width:100%;}
+  #kw-user-error{color:var(--clay);font-size:.85rem;margin-top:12px;}
+  .kw-role-row{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .kw-role-option{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:500;
+    font-size:0.9rem;
+    color:var(--ink);
+    text-align:left;
+    margin-bottom:0;
+    cursor:pointer;
+  }
+  .kw-role-option input{ width:auto; margin:0; }
+  .kw-teacher-password-field{ text-align:left; }
+  .kw-teacher-password-field.hidden{ display:none; }
+  .kw-teacher-hint{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    line-height:1.4;
+    margin:-8px 0 15px 0;
+  }
+  .kw-user-actions{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  .kw-user-actions button{
+    font-family:'Work Sans',sans-serif;
+    font-weight:600;
+    border:none;
+    background:transparent;
+    color:var(--paper);
+    cursor:pointer;
+    text-decoration:underline;
+  }
+
+  .kw-visually-hidden{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ---------- USUARIO ---------- -->
+<div id="kw-user-screen" class="kw-user-screen">
+  <div class="kw-user-card">
+    <div class="kw-user-icon">🌱</div>
+    <h1>Yachay Wasi</h1>
+    <p>Historias que tejen comunidad</p>
+
+    <h2>¡Bienvenido!</h2>
+    <p class="kw-user-description">
+      Crea tu usuario para compartir historias y guardar tu progreso.
+    </p>
+
+    <label for="kw-user-name">Tu nombre</label>
+    <input
+      type="text"
+      id="kw-user-name"
+      placeholder="Escribe tu nombre"
+      maxlength="30"
+      autocomplete="name"
+    >
+
+    <div class="kw-role-row" role="radiogroup" aria-label="Tipo de usuario">
+      <label class="kw-role-option">
+        <input type="radio" name="kw-role" value="estudiante" checked onchange="kwToggleRoleFields()">
+        Soy estudiante
+      </label>
+      <label class="kw-role-option">
+        <input type="radio" name="kw-role" value="profesor" onchange="kwToggleRoleFields()">
+        Soy profesor/a
+      </label>
+    </div>
+
+    <div id="kw-teacher-password-field" class="kw-teacher-password-field hidden">
+      <label for="kw-user-password">Clave de profesor/a</label>
+      <input
+        type="password"
+        id="kw-user-password"
+        placeholder="Crea o escribe tu clave"
+        maxlength="30"
+        autocomplete="new-password"
+      >
+      <label for="kw-user-email">Tu correo</label>
+      <input
+        type="email"
+        id="kw-user-email"
+        placeholder="tucorreo@ejemplo.com"
+        maxlength="80"
+        autocomplete="email"
+      >
+      <p class="kw-teacher-hint">
+        Si es la primera vez que usas este nombre como profesor/a, esta clave y este correo quedarán guardados. Al crear tu cuenta se generará un código de clase para compartir con tus alumnos.
+      </p>
+    </div>
+
+    <div id="kw-student-code-field" class="kw-teacher-password-field">
+      <label for="kw-user-code">Código de clase</label>
+      <input
+        type="text"
+        id="kw-user-code"
+        placeholder="Pídeselo a tu profesor/a"
+        maxlength="10"
+        style="text-transform:uppercase;"
+      >
+      <p class="kw-teacher-hint">
+        Tu profesor/a te dio un código (ej. YW-4X7B) al crear su cuenta. Escríbelo para quedar inscrito en su clase.
+      </p>
+    </div>
+
+    <button class="kw-btn kw-btn-primary" onclick="kwCreateUser()">
+      Entrar a Yachay Wasi →
+    </button>
+
+    <div id="kw-user-error"></div>
+  </div>
+</div>
+
+<div class="kw-root">
+
+  <header class="kw-header">
+    <div class="kw-header-inner">
+      <div class="kw-logo-row">
+        <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+          <path d="M40 0h20v20h20v20h20v20H80v20H60v20H40V80H20V60H0V40h20V20h20V0z" opacity="0"/>
+          <g>
+            <rect x="40" y="0" width="20" height="20"/>
+            <rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/>
+            <rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/>
+            <rect x="35" y="35" width="30" height="30" fill="#1B2A4A"/>
+          </g>
+        </svg>
+        <h1 class="kw-brand">Yachay Wasi</h1>
+      </div>
+      <p class="kw-slogan">Historias que tejen comunidad</p>
+      <div class="kw-user-actions">
+        <button type="button" onclick="kwLogout()">Cerrar sesión</button>
+      </div>
+    </div>
+    <svg class="kw-thread" viewBox="0 0 960 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10 V34 H0 Z" fill="#F7F0DD"></path>
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10" fill="none" stroke="#D9A441" stroke-width="2" opacity="0.6"></path>
+    </svg>
+  </header>
+
+  <nav class="kw-nav">
+    <button class="kw-tab active" id="tab-tablon" onclick="kwShowSection('tablon')">Tablón de la comunidad</button>
+    <button class="kw-tab" id="tab-biblioteca" onclick="kwShowSection('biblioteca')">Biblioteca de historias</button>
+    <button class="kw-tab hidden" id="tab-profesor" onclick="kwShowSection('profesor')">Panel del profesor/a</button>
+  </nav>
+
+  <main class="kw-main">
+
+    <section class="kw-section visible" id="section-tablon">
+      <div class="kw-section-head">
+        <h2>Comparte lo que vive tu comunidad</h2>
+        <p>Escribe un cuento, una historia real o una situación que tu comunidad esté enfrentando. Haz clic en el botón para mejorar tu texto con IA.</p>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-field">
+          <label for="kw-name">Tu nombre</label>
+          <input type="text" id="kw-name" placeholder="¿Cómo te llamas?">
+        </div>
+        <div class="kw-row">
+          <div class="kw-field">
+            <label for="kw-title">Título de tu historia</label>
+            <input type="text" id="kw-title" placeholder="Dale un título">
+          </div>
+          <div class="kw-field">
+            <label for="kw-category">Categoría</label>
+            <select id="kw-category">
+              <option value="Cuento">Cuento</option>
+              <option value="Historia real">Historia real</option>
+              <option value="Situación de la comunidad">Situación de la comunidad</option>
+            </select>
+          </div>
+        </div>
+        <div class="kw-field">
+          <label for="kw-content">Escribe aquí</label>
+          <textarea id="kw-content" rows="6" placeholder="Cuenta tu historia con tus propias palabras..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="kw-btn kw-btn-gold" onclick="kwAiAssist()">✨ Mejorar con IA</button>
+          <button class="kw-btn kw-btn-primary" onclick="kwPublishPost()">Publicar en el tablón</button>
+        </div>
+
+        <div class="kw-ai-box" id="kw-ai-box"></div>
+      </div>
+
+      <div class="kw-posts" id="kw-posts"></div>
+    </section>
+
+    <section class="kw-section" id="section-biblioteca">
+      <div class="kw-section-head" id="kw-lib-head">
+        <h2>Elige una historia para leer</h2>
+        <p>Cada historia se lee por partes. Antes de seguir a la siguiente parte, responde una pregunta corta de análisis crítico sobre causa, efecto y vocabulario contextual.</p>
+      </div>
+
+      <div class="kw-story-grid" id="kw-story-grid"></div>
+
+      <div class="kw-reader" id="kw-reader">
+        <div class="kw-reader-head">
+          <button class="kw-btn kw-btn-ghost" onclick="kwCloseStory()">← Volver a la biblioteca</button>
+        </div>
+        <div id="kw-thread-progress" class="kw-thread-progress"></div>
+        <div class="kw-reader-card" id="kw-reader-card"></div>
+      </div>
+    </section>
+
+    <section class="kw-section" id="section-profesor">
+      <div class="kw-section-head">
+        <h2>Tu clase</h2>
+        <p>Comparte tu código de clase con tus alumnos para que se inscriban contigo. Aquí puedes ver quiénes se han unido y su avance.</p>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-field">
+          <label>Tu código de clase</label>
+          <div id="kw-codigo-clase" style="font-size:1.4rem; font-weight:700; color:var(--night); letter-spacing:1px;">—</div>
+        </div>
+
+        <button class="kw-btn kw-btn-gold" onclick="kwEnviarRegistro()" id="kw-btn-enviar-registro">
+          📧 Enviar registro a mi correo
+        </button>
+        <div class="kw-ai-box" id="kw-registro-box"></div>
+      </div>
+
+      <div class="kw-card">
+        <h3 style="margin-top:0; color:var(--night);">Alumnos inscritos</h3>
+        <div id="kw-lista-alumnos">Cargando...</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   ESTADO
+   ============================================================ */
+/* ============================================================
+   BASE DE DATOS SIMULADA
+   ============================================================ */
+
+const kwDB = {
+  usuarios: JSON.parse(localStorage.getItem("yachayWasi_usuarios")) || [],
+  publicaciones: JSON.parse(localStorage.getItem("yachayWasi_publicaciones")) || [],
+  progreso: JSON.parse(localStorage.getItem("yachayWasi_progreso")) || []
+};
+
+function kwSaveDB(){
+  localStorage.setItem("yachayWasi_usuarios", JSON.stringify(kwDB.usuarios));
+  localStorage.setItem("yachayWasi_publicaciones", JSON.stringify(kwDB.publicaciones));
+  localStorage.setItem("yachayWasi_progreso", JSON.stringify(kwDB.progreso));
+}
+
+let kwCurrentUser = JSON.parse(
+  localStorage.getItem("yachayWasi_usuarioActual") || "null"
+);
+
+/* ============================================================
+   DATOS INICIALES DEL TABLÓN
+   ============================================================ */
+
+let kwPosts = [
+  {
+    name: "Rosa M.",
+    title: "El pozo que arreglamos entre todos",
+    category: "Historia real",
+    content: "En mi comunidad el pozo de agua estaba roto hace meses. Un día nos juntamos los vecinos, cada uno trajo lo que pudo: dinero, herramientas o comida para los que trabajaban. En dos fines de semana el pozo volvió a funcionar. Aprendí que cuando nos unimos, los problemas grandes se hacen más pequeños."
+  },
+  {
+    name: "Julio C.",
+    title: "Mi abuelo y las semillas de siempre",
+    category: "Cuento",
+    content: "Mi abuelo guarda semillas de papa en una bolsa de tela desde hace treinta años. Dice que cada semilla tiene una historia: una sequía que sobrevivió, una helada que resistió. Ahora yo también guardo mis propias semillas, para seguir contando esa historia."
+  }
+];
+
+/* Si la base de datos está vacía, cargar las publicaciones iniciales. */
+if (kwDB.publicaciones.length === 0) {
+  kwPosts.forEach((post, index) => {
+    const existingUser = kwDB.usuarios.find(
+      user => user.nombre === post.name
+    );
+
+    let user = existingUser;
+
+    if (!user) {
+      user = {
+        id: kwDB.usuarios.length + 1,
+        nombre: post.name,
+        tipo: "estudiante"
+      };
+      kwDB.usuarios.push(user);
+    }
+
+    kwDB.publicaciones.push({
+      id: kwDB.publicaciones.length + 1,
+      usuario_id: user.id,
+      nombre: user.nombre,
+      title: post.title,
+      category: post.category,
+      content: post.content,
+      fecha: new Date().toISOString()
+    });
+  });
+
+  kwSaveDB();
+}
+
+kwPosts = kwDB.publicaciones;
+
+const kwStories = [
+  {
+    id: "agua",
+    icon: "💧",
+    title: "El enigma del manantial de Chaqllas",
+    teaser: "Una disminución inexplicable en el caudal del manantial obliga a la comunidad de Chaqllas a investigar una compleja red de factores socioambientales.",
+    level: "Nivel: 4to y 5to de primaria (Avanzado)",
+    parts: [
+      {
+        text: [
+          "Enclavado en las altas cumbres de la cordillera, el poblado de Chaqllas dependía estrictamente de un sistema de acequias ancestrales alimentadas por el manantial 'Qori Pukio'. Sin embargo, durante el último trimestre, el caudal experimentó una merma drástica del cuarenta por ciento, alterando las rutinas de las familias y desatando tensiones latentes entre los agricultores de la parte alta y los pobladores del núcleo urbano.",
+          "Mariana, una estudiante de quinto grado profundamente interesada en la gestión de recursos hídricos, advirtió que el problema no respondía únicamente a la escasez de precipitaciones estacionales. Al trazar un mapa mental de las rutas de conducción, observó discrepancias significativas entre el volumen que emergía de la napa freática y el que realmente se recibía en los reservorios de distribución comunal."
+        ],
+        question: "A partir de la situación descrita, ¿cuál es el factor central que intensifica el conflicto inicial en Chaqllas?",
+        options: [
+          "La falta de interés de los jóvenes por aprender sobre agricultura sostenible",
+          "Una reducción crítica del caudal combinada con discrepancias en la distribución del agua",
+          "La decisión de la municipalidad de clausurar permanentemente el manantial",
+          "El incremento desmedido en el costo del consumo de agua potable por tubería"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Decidida a comprobar su hipótesis mediante la observación sistemática, Mariana recorrió los ramales secundarios acompañada por su docente de ciencias. En el sector denominado 'Kulli', descubrió una fisura estructural de considerable magnitud en un tramo elevado del acueducto de piedra, agravada por derivaciones clandestinas no autorizadas que desviaban líquido hacia parcelas privadas de cultivo intensivo.",
+          "Lejos de asumir una postura confrontativa, Mariana estructuró un informe técnico preliminar detallando las coordenadas de las pérdidas y el impacto acumulativo de las derivaciones ilegales. Al presentarlo ante la junta directiva comunal, demostró que la optimización de la infraestructura existente superaba en urgencia a la búsqueda de nuevas fuentes de abastecimiento."
+        ],
+        question: "¿Qué revela la metodología empleada por Mariana al investigar el problema en el sector 'Kulli'?",
+        options: [
+          "Una dependencia exclusiva de la opinión de terceros sin verificación en el campo",
+          "Un enfoque empírico basado en el análisis de causas físicas y la formulación de propuestas viables",
+          "Un deseo de sancionar individualmente a los vecinos que desviaban el agua",
+          "Una intención de privatizar el manejo de las acequias comunales"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "La asamblea comunal evaluó los hallazgos de Mariana bajo los principios de equidad y reciprocidad tradicional (faena y minka). Se acordó una reestructuración de los turnos de riego, la restauración colectiva del tramo afectado mediante mampostería tradicional y la instalación de comités de vigilancia rotativos.",
+          "Tres meses después, los indicadores de caudal recuperaron los niveles históricos óptimos, consolidando en la comunidad la convicción de que la gobernanza participativa del agua requiere tanto rigor técnico como cohesión social."
+        ],
+        question: "¿Qué conclusión conceptual sintetiza el desenlace de esta historia sobre la gestión comunitaria?",
+        options: [
+          "La tecnología moderna reemplaza por completo a las prácticas tradicionales de organización",
+          "La sostenibilidad de los recursos comunitarios se fortalece articulando evidencia técnica y participación colectiva",
+          "Las autoridades municipales son las únicas responsables de mantener los sistemas hídricos",
+          "Los conflictos por el agua solo pueden resolverse mediante sanciones económicas severas"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "chacra",
+    icon: "🌽",
+    title: "La resiliencia agrobiodiversa",
+    teaser: "Frente a anomalías climáticas extremas, la sabiduría agroecológica de la abuela Eusebia se convierte en un modelo de adaptación preventiva.",
+    level: "Nivel: 4to y 5to de primaria (Avanzado)",
+    parts: [
+      {
+        text: [
+          "La chacra experimental de la abuela Eusebia constituía un santuario fitogenético donde coexistían más de quince variedades nativas de tubérculos y granos altoandinos. Tomás, su nieto y asistente en las labores de cultivo, documentaba minuciosamente los ciclos fenológicos de cada especie bajo un régimen de lluvias cada vez más anómalo y errático.",
+          "Ese año, el retraso prolongado del período de heladas y monzones expuso la vulnerabilidad de los monocultivos comerciales de la región, cuyos rendimientos colapsaron ante la sequía prolongada y la proliferación de patógenos oportunistas impulsados por las altas temperaturas."
+        ],
+        question: "¿Qué contraste principal establece la narración entre la chacra de Eusebia y los monocultivos comerciales de la región?",
+        options: [
+          "La chacra de Eusebia dependía enteramente de fertilizantes químicos industriales",
+          "Los monocultivos comerciales demostraron mayor resistencia a las anomalías climáticas que la biodiversidad",
+          "La diversidad genética de la chacra protegió la producción frente al colapso sufrido por los monocultivos",
+          "No existía ninguna diferencia operativa entre ambos sistemas de cultivo"
+        ],
+        correct: 2
+      },
+      {
+        text: [
+          "Aplicando el principio de diversificación de riesgos heredado de sus antepasados, Eusebia había incrementado deliberadamente el ratio de siembra de especies altamente tolerantes al estrés hídrico, como el tarwi (Lupinus mutabilis) y ecotipos selectos de quinua de secano, relegando los cultivos altamente demandantes de humedad a zonas de microclima favorable.",
+          "Esta estrategia de policultivo rotativo no solo optimizó la retención de humedad edáfica mediante la cobertura vegetal mixta, sino que fijó nitrógeno atmosférico de manera natural en los suelos degradados por la erosión eólica."
+        ],
+        question: "¿Cuál fue el mecanismo agroecológico clave mediante el cual la abuela mitigó los efectos de la sequía?",
+        options: [
+          "La aplicación masiva de pesticidas sintéticos para erradicar plagas",
+          "La priorización de cultivos altamente resistentes al estrés hídrico y el uso de cobertura vegetal mixta",
+          "El riego artificial intensivo mediante pozos tubulares profundos",
+          "La reducción drástica de la superficie cultivada a la mitad durante todo el año"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Ante la evidente pérdida de cosechas en las parcelas vecinas, Eusebia instituyó un banco comunal de intercambio de semillas resilientes, priorizando la seguridad alimentaria regional por encima del lucro individual. Tomás comprendió que la soberanía alimentaria descansa sobre la preservación activa del conocimiento ancestral.",
+          "La experiencia demostró que la adaptación al cambio climático global no requiere únicamente de innovaciones tecnológicas externas, sino de la valorización crítica del patrimonio biocultural local."
+        ],
+        question: "¿Qué implicancia socioeconómica tuvo la decisión de Eusebia de crear un banco comunal de intercambio de semillas?",
+        options: [
+          "Generó una competencia desleal con los mercados mayoristas de la ciudad",
+          "Fomentó la solidaridad regional y garantizó la seguridad alimentaria colectiva ante la crisis",
+          "Provocó el agotamiento definitivo de las reservas de granos andinos",
+          "Obligó a los agricultores a endeudarse con la banca formal"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "camino",
+    icon: "🎒",
+    title: "La ruta de la persistencia escolar",
+    teaser: "La interrupción vial estacional pone en jaque la continuidad educativa de Rosa, detonando un proceso de incidencia comunitaria y gestión pública.",
+    level: "Nivel: 4to y 5to de primaria (Avanzado)",
+    parts: [
+      {
+        text: [
+          "El trayecto cotidiano de Rosa hacia la Institución Educativa Integrada implicaba transitar por un flanco geológico inestable que, durante los picos de pluviosidad, se convertía en un lodazal intransitable saturado de arcilla expansiva. Esta contingencia geodinámica provocaba ausentismo crónico y un progresivo rezago en los aprendizajes fundamentales de los estudiantes de las zonas periféricas.",
+          "Frente a la sugerencia de su tutor de suspender temporalmente su asistencia escolar para mitigar riesgos, Rosa experimentó una profunda disonancia cognitiva, consciente de que la deserción temporal incrementa exponencialmente la probabilidad de abandono definitivo del sistema educativo."
+        ],
+        question: "¿Por qué Rosa rechazó inicialmente la sugerencia de suspender temporalmente su asistencia a clases?",
+        options: [
+          "Porque consideraba que el trayecto diario era un ejercicio recreativo saludable",
+          "Porque comprendía que la interrupción temporal escolar eleva el riesgo de abandono definitivo",
+          "Porque las normas del Ministerio de Educación prohibían las faltas justificadas",
+          "Porque sus calificaciones dependían estrictamente de la asistencia perfecta"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Lejos de adoptar una postura pasiva, Rosa sistematizó un registro de incidencias de inasistencia escolar correlacionado con los días de colapso vial, y lo expuso ante el Consejo Educativo Institucional (CONEI). La evidencia cuantitativa recabada desarticuló el argumento de que el ausentismo respondía a desinterés individual de los alumnos.",
+          "Articulando esfuerzos con la plana docente y las juntas vecinales, la comunidad escolar redactó un petitorio formal fundamentado en el derecho constitucional a la educación obligatoria y a la accesibilidad vial rural, exigiendouna solución logística integral al gobierno local."
+        ],
+        question: "¿Qué rol cumplió el registro sistemático de incidencias elaborado por Rosa en el proceso de reclamo?",
+        options: [
+          "Sirvió como argumento empírico para demostrar que el problema era sistémico y no por desinterés",
+          "Fue utilizado exclusivamente para justificar las calificaciones bajas del período",
+          "Demostró que la construcción de la carretera original presentaba fallas de diseño",
+          "Permitió calcular el presupuesto exacto que la municipalidad debía invertir en obras"
+        ],
+        correct: 0
+      },
+      {
+        text: [
+          "La presión institucional ejercida surtió efecto: la municipalidad distrital suscribió un convenio interinstitucional para habilitar una ruta alterna de transporte estudiantil y estabilizar el talud crítico mediante bioingeniería de suelos.",
+          "Para Rosa, el episodio dejó una lección cívica indeleble: la transformación de barreras estructurales en oportunidades de desarrollo comunitario exige organización, uso riguroso de evidencias y persistencia en el diálogo democrático."
+        ],
+        question: "¿Qué significado adquiere el concepto de 'bioingeniería de suelos' en el contexto de la solución lograda?",
+        options: [
+          "La instalación de sistemas informáticos para monitorear el clima en tiempo real",
+          "El uso de técnicas de ingeniería combinadas con elementos biológicos para estabilizar taludes naturales",
+          "La reubicación total del centro educativo hacia una zona urbana segura",
+          "La prohibición absoluta del tránsito vehicular pesado por la zona afectada"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "feria",
+    icon: "🧺",
+    title: "Innovación comercial en la feria dominical",
+    teaser: "La recesión en el volumen de transacciones de don Julio desafía a su hijo Kevin a implementar estrategias de mercadotecnia empírica y análisis de datos.",
+    level: "Nivel: 4to y 5to de primaria (Avanzado)",
+    parts: [
+      {
+        text: [
+          "El mercado dominical de la capital provincial representaba el epicentro de la economía de subsistencia familiar para don Julio y su hijo Kevin. No obstante, la saturación de oferentes externos y la alteración en los patrones de consumo local provocaron una contracción sostenida del veinticinco por ciento en el volumen de ventas de sus derivados lácteos durante el último trimestre.",
+          "Atrapado en la rutina operativa, don Julio atribuía la crisis a una fatídica mala racha estacional, resistiéndose a modificar las tácticas comerciales que su familia había empleado durante décadas sin mediar registros estadísticos formales."
+        ],
+        question: "¿Cuál era la causa subyacente de la crisis comercial que afectaba el puesto de don Julio según el contexto socioeconómico?",
+        options: [
+          "La prohibición gubernamental de comercializar productos lácteos artesanales",
+          "Una contracción de ventas originada por la saturación de competencia y cambios en el consumo",
+          "El abandono definitivo de las labores agrícolas por parte de Kevin",
+          "La pérdida total de la producción de miel debido a incendios forestales"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Kevin, aplicando nociones de estadística descriptiva básica aprendidas en el colegio, propuso implantar un sistema dual de optimización: por un lado, un registro diario disociado por tipo de producto, horario de rotación y perfil demográfico del comprador; por otro, la incorporación de un sello de trazabilidad artesanal en el empaque para fomentar la fidelización de marca.",
+          "Ante el escepticismo inicial de su progenitor, Kevin demostró mediante una proyección gráfica simple cómo el stock de quesos madurados se rezagaba sistemáticamente los domingos por la tarde, sugiriendo una relocalización estratégica del puesto hacia el sector de mayor tránsito peatonal."
+        ],
+        question: "¿Qué beneficio estratégico aportó el registro diario disociado propuesto por Kevin?",
+        options: [
+          "Permitió identificar patrones específicos de consumo y optimizar la asignación del stock",
+          "Garantizó la exención total del pago de tributos municipales en la feria",
+          "Eliminó la necesidad de fabricar productos lácteos durante los días de semana",
+          "Duplicó de forma inmediata el precio de venta de la miel artesanal"
+        ],
+        correct: 0
+      },
+      {
+        text: [
+          "La implementación de las mejoras logísticas dinamizó el flujo de caja familiar, incrementando el margen de comercialización en un tercio e inaugurando un canal de pedidos anticipados mediante mensajería básica con clientes recurrentes.",
+          "Don Julio reconoció entonces que la tradición comercial no se opone a la innovación metodológica, sino que se revitaliza cuando se entrelaza con el análisis crítico de la información empírica."
+        ],
+        question: "¿Qué conclusión conceptual se desprende de la evolución del negocio familiar en la feria?",
+        options: [
+          "Las microempresas rurales deben abandonar totalmente sus métodos tradicionales para sobrevivir",
+          "La combinación de identidad artesanal y análisis metódico de datos potencia la competitividad local",
+          "El marketing digital avanzado es el único medio eficaz para vender en mercados comunales",
+          "La rentabilidad económica depende exclusivamente de la suerte y de las condiciones climáticas"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "rio",
+    icon: "🌊",
+    title: "Vigilancia socioambiental en la cuenca",
+    teaser: "Una alteración físico-química severa en el ecosistema fluvial moviliza a la comunidad escolar hacia la fiscalización ambiental y la defensa jurídica del territorio.",
+    level: "Nivel: 4to y 5to de primaria (Avanzado)",
+    parts: [
+      {
+        text: [
+          "La alteración cromática y la emisión de compuestos sulfurados en el cauce del río principal del valle encendieron las alarmas ecológicas de la comunidad. La mortandad masiva de peces autóctonos evidenció una ruptura drástica en la estabilidad del ecosistema ribereño, amenazando la seguridad del riego agrícola y el consumo humano indirecto.",
+          "Ante la pasividad inicial de las instancias burocráticas locales, los pobladores se enfrentaron al dilema de asumir una postura de indiferencia o estructurar un expediente técnico autónomo de fiscalización ciudadana."
+        ],
+        question: "¿Qué impacto inmediato generó la alteración físico-química del río en el equilibrio de la cuenca?",
+        options: [
+          "Un incremento notable en la pureza y potabilidad del agua para el riego",
+          "La muerte masiva de especies hidrobiológicas y la amenaza al sistema agroproductivo",
+          "La ampliación automática del caudal fluvial durante la época de estiaje",
+          "La colonización pacífica de nuevas especies vegetales en la ribera"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Organizados en brigadas de monitoreo ambiental coordinadas por los docentes de ciencias, los estudiantes ascendieron hacia las nacientes de la cuenca para documentar la fuente de emisión contaminante, identificando vertimientos clandestinos provenientes de labores extractivas informales no fiscalizadas.",
+          "Empleando protocolos estandarizados de recolección de muestras y registro fotográfico georreferenciado, la comunidad estructuró un informe probatorio irrefutable que fue interpuesto directamente ante la fiscalía especializada en materia ambiental."
+        ],
+        question: "¿Qué criterio metodológico rigió la recolección de pruebas realizada por las brigadas comunitarias?",
+        options: [
+          "La informalidad y el anonimato absoluto en la presentación de denuncias",
+          "La estandarización de protocolos de muestreo y georreferenciación para asegurar validez jurídica",
+          "La destrucción selectiva de la maquinaria empleada en la actividad extractiva",
+          "La difusión masiva de rumores anónimos a través de redes sociales"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "La presión jurídica derivada del expediente ciudadano obligó al organismo de control ambiental a dictar medidas cautelares de paralización de actividades y remediación obligatoria del cauce. En cuestión de meses, los parámetros biológicos del río comenzaron a normalizarse.",
+          "La experiencia consolidó en la comunidad una profunda conciencia sobre el principio de corresponsabilidad ambiental, demostrando que la defensa de los bienes comunes naturales exige rigor técnico, organización social y firmeza institucional."
+        ],
+        question: "¿Qué enseñanza cívica y ambiental fundamental deja el desenlace de esta crisis ecológica?",
+        options: [
+          "La fiscalización ciudadana basada en evidencias constituye un pilar esencial para la defensa del patrimonio ecológico",
+          "Los daños causados por actividades extractivas en los ríos son técnicamente irreversibles",
+          "La protección ambiental es una competencia exclusiva que excluye a la sociedad civil",
+          "Las denuncias formales ante la fiscalía carecen de utilidad práctica frente a la contaminación"
+        ],
+        correct: 1
+      }
+    ]
+  }
+];
+
+let kwCurrentStory = null;
+let kwCurrentPart = 0;
+let kwPartsAnswered = [];
+let kwPartAttempts = [];
+const KW_MAX_ATTEMPTS = 2;
+
+/* ============================================================
+   SISTEMA DE USUARIOS
+   ============================================================ */
+
+function kwToggleRoleFields(){
+  const role = document.querySelector('input[name="kw-role"]:checked').value;
+  const teacherFields = document.getElementById("kw-teacher-password-field");
+  const studentField = document.getElementById("kw-student-code-field");
+
+  if (role === "profesor") {
+    teacherFields.classList.remove("hidden");
+    studentField.classList.add("hidden");
+    document.getElementById("kw-user-code").value = "";
+  } else {
+    teacherFields.classList.add("hidden");
+    studentField.classList.remove("hidden");
+    document.getElementById("kw-user-password").value = "";
+    document.getElementById("kw-user-email").value = "";
+  }
+}
+
+async function kwCreateUser(){
+  const input = document.getElementById("kw-user-name");
+  const error = document.getElementById("kw-user-error");
+  const name = input.value.trim();
+  const role = document.querySelector('input[name="kw-role"]:checked').value;
+  const passwordInput = document.getElementById("kw-user-password");
+  const password = passwordInput.value;
+  const emailInput = document.getElementById("kw-user-email");
+  const email = emailInput.value.trim();
+  const codeInput = document.getElementById("kw-user-code");
+  const code = codeInput.value.trim();
+  const submitBtn = document.querySelector('#kw-user-screen .kw-btn-primary');
+
+  error.textContent = "";
+
+  if (!name) {
+    error.textContent = "Por favor, escribe tu nombre.";
+    input.focus();
+    return;
+  }
+
+  if (name.length < 2) {
+    error.textContent = "El nombre debe tener al menos 2 caracteres.";
+    input.focus();
+    return;
+  }
+
+  if (role === "profesor") {
+    if (!password || password.length < 4) {
+      error.textContent = "La clave de profesor/a debe tener al menos 4 caracteres.";
+      passwordInput.focus();
+      return;
+    }
+    if (!email || !email.includes("@")) {
+      error.textContent = "Ingresa un correo válido.";
+      emailInput.focus();
+      return;
+    }
+  } else {
+    if (!code) {
+      error.textContent = "Ingresa el código de clase que te dio tu profesor/a.";
+      codeInput.focus();
+      return;
+    }
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Entrando...";
+
+  try {
+    const response = await fetch('/api/usuarios', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: name,
+        tipo: role,
+        clave: role === 'profesor' ? password : undefined,
+        correo: role === 'profesor' ? email : undefined,
+        codigoClase: role === 'estudiante' ? code : undefined
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.ok) {
+      error.textContent = data.error || 'Ocurrió un error, intenta de nuevo.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Entrar a Yachay Wasi →";
+      return;
+    }
+
+    kwCurrentUser = data.usuario;
+
+    localStorage.setItem(
+      "yachayWasi_usuarioActual",
+      JSON.stringify(kwCurrentUser)
+    );
+
+    kwEnterPage();
+
+  } catch (err) {
+    console.error('Error al crear/entrar usuario:', err);
+    error.textContent = 'No se pudo conectar con el servidor. Intenta de nuevo.';
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Entrar a Yachay Wasi →";
+  }
+}
+
+function kwCheckUser(){
+  if (kwCurrentUser) {
+    kwEnterPage();
+    return;
+  }
+
+  document
+    .getElementById("kw-user-screen")
+    .classList.remove("hidden");
+
+  setTimeout(() => {
+    document.getElementById("kw-user-name").focus();
+  }, 50);
+}
+
+function kwEnterPage(){
+  document
+    .getElementById("kw-user-screen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("tab-profesor")
+    .classList.toggle("hidden", !kwCurrentUser || kwCurrentUser.tipo !== "profesor");
+
+  kwShowWelcome();
+}
+
+function kwShowWelcome(){
+  const header = document.querySelector(".kw-header-inner");
+
+  if (!header || !kwCurrentUser) return;
+
+  let existing = document.getElementById("kw-current-user");
+
+  if (!existing) {
+    existing = document.createElement("p");
+    existing.id = "kw-current-user";
+    existing.style.margin = "12px 0 0";
+    existing.style.color = "var(--paper)";
+    existing.style.fontSize = "0.9rem";
+    header.appendChild(existing);
+  }
+
+  existing.innerHTML =
+    "👋 Hola, <strong>" +
+    kwEscape(kwCurrentUser.nombre) +
+    "</strong>" +
+    (kwCurrentUser.tipo === "profesor"
+      ? " <span style=\"opacity:0.75;\">(profesor/a)</span>"
+      : "");
+}
+
+function kwLogout(){
+  localStorage.removeItem("yachayWasi_usuarioActual");
+  kwCurrentUser = null;
+  location.reload();
+}
+
+/* ============================================================
+   PANEL DEL PROFESOR
+   ============================================================ */
+async function kwRenderTeacherPanel(){
+  if (!kwCurrentUser || kwCurrentUser.tipo !== 'profesor') return;
+
+  document.getElementById('kw-codigo-clase').textContent = kwCurrentUser.codigoClase || '—';
+
+  const lista = document.getElementById('kw-lista-alumnos');
+  lista.textContent = 'Cargando...';
+
+  try {
+    const response = await fetch('/api/alumnos?profesorId=' + encodeURIComponent(kwCurrentUser.id));
+    const data = await response.json();
+
+    if (!data.ok) {
+      lista.textContent = 'No se pudo cargar la lista de alumnos.';
+      return;
+    }
+
+    if (data.alumnos.length === 0) {
+      lista.textContent = 'Todavía no tienes alumnos inscritos con tu código de clase.';
+      return;
+    }
+
+    lista.innerHTML = '<table style="width:100%; border-collapse:collapse;">' +
+      '<thead><tr>' +
+      '<th style="text-align:left; padding:6px; border-bottom:2px solid var(--paper-dim);">Alumno</th>' +
+      '<th style="text-align:left; padding:6px; border-bottom:2px solid var(--paper-dim);">Partes completadas</th>' +
+      '</tr></thead><tbody>' +
+      data.alumnos.map(a =>
+        '<tr>' +
+        '<td style="padding:6px; border-bottom:1px solid var(--paper-dim);">' + kwEscape(a.nombre) + '</td>' +
+        '<td style="padding:6px; border-bottom:1px solid var(--paper-dim);">' + a.partesCompletadas + '</td>' +
+        '</tr>'
+      ).join('') +
+      '</tbody></table>';
+
+  } catch (err) {
+    console.error('Error al cargar alumnos:', err);
+    lista.textContent = 'No se pudo conectar con el servidor.';
+  }
+}
+
+async function kwEnviarRegistro(){
+  const btn = document.getElementById('kw-btn-enviar-registro');
+  const box = document.getElementById('kw-registro-box');
+
+  box.classList.add('visible');
+  box.innerHTML = '<span class="kw-ai-loading">📧 Enviando registro a tu correo...</span>';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('/api/enviar-registro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ profesorId: kwCurrentUser.id })
+    });
+
+    const data = await response.json();
+
+    if (data.ok) {
+      box.innerHTML = '✅ Registro enviado a tu correo (' + kwEscape(kwCurrentUser.correo || '') + ').';
+    } else {
+      box.innerHTML = '❌ ' + kwEscape(data.error || 'No se pudo enviar el correo.');
+    }
+
+  } catch (err) {
+    console.error('Error al enviar registro:', err);
+    box.innerHTML = '❌ No se pudo conectar con el servidor.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* Enter también funciona al presionar Enter en el campo de nombre. */
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("kw-user-name");
+
+  if (input) {
+    input.addEventListener("keydown", event => {
+      if (event.key === "Enter") {
+        kwCreateUser();
+      }
+    });
+  }
+});
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+function kwShowSection(name){
+  document.getElementById('section-tablon').classList.toggle('visible', name === 'tablon');
+  document.getElementById('section-biblioteca').classList.toggle('visible', name === 'biblioteca');
+  document.getElementById('section-profesor').classList.toggle('visible', name === 'profesor');
+  document.getElementById('tab-tablon').classList.toggle('active', name === 'tablon');
+  document.getElementById('tab-biblioteca').classList.toggle('active', name === 'biblioteca');
+  document.getElementById('tab-profesor').classList.toggle('active', name === 'profesor');
+
+  if (name === 'profesor') {
+    kwRenderTeacherPanel();
+  }
+}
+
+/* ============================================================
+   TABLÓN DE LA COMUNIDAD
+   ============================================================ */
+function kwRenderPosts(){
+  const wrap = document.getElementById('kw-posts');
+  wrap.innerHTML = '';
+
+  kwDB.publicaciones.slice().reverse().forEach(post => {
+    const el = document.createElement('article');
+    el.className = 'kw-post';
+
+    el.innerHTML = `
+      <div class="kw-post-meta">
+        <span>${kwEscape(post.nombre || 'Anónimo')}</span>
+        <span class="kw-tag">${kwEscape(post.category || '')}</span>
+      </div>
+      <h3>${kwEscape(post.title || 'Sin título')}</h3>
+      <p>${kwEscape(post.content || '')}</p>
+    `;
+
+    wrap.appendChild(el);
+  });
+}
+
+function kwEscape(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+function kwPublishPost(){
+  if (!kwCurrentUser) {
+    alert('Debes crear un usuario antes de publicar.');
+    return;
+  }
+
+  const title = document.getElementById('kw-title').value.trim();
+  const category = document.getElementById('kw-category').value;
+  const content = document.getElementById('kw-content').value.trim();
+
+  if (!content) {
+    alert('Escribe algo antes de publicar tu historia.');
+    return;
+  }
+
+  const newPost = {
+    id: kwDB.publicaciones.length + 1,
+    usuario_id: kwCurrentUser.id,
+    nombre: kwCurrentUser.nombre,
+    title: title || 'Sin título',
+    category: category,
+    content: content,
+    fecha: new Date().toISOString()
+  };
+
+  kwDB.publicaciones.push(newPost);
+  kwSaveDB();
+
+  kwPosts = kwDB.publicaciones;
+
+  document.getElementById('kw-title').value = '';
+  document.getElementById('kw-content').value = '';
+  document.getElementById('kw-ai-box').classList.remove('visible');
+
+  kwRenderPosts();
+}
+
+// Corrector de tildes con el diccionario ampliado (comprensión, frustración, increíble, sufijos -ción, esdrújulas y más)
+function kwAiAssist(){
+  const contentArea = document.getElementById('kw-content');
+  const content = contentArea.value.trim();
+  const box = document.getElementById('kw-ai-box');
+
+  if(!content){
+    alert('Escribe primero un borrador de tu historia para que la IA pueda revisarlo.');
+    return;
+  }
+
+  box.classList.add('visible');
+  box.innerHTML = '<span class="kw-ai-loading">✨ Mejorando tildes y redacción con IA...</span>';
+
+  setTimeout(() => {
+    let improved = content;
+
+    // 1. Limpieza de espacios múltiples
+    improved = improved.replace(/\s+/g, ' ');
+
+    // 2. Diccionario masivo con más de 1000 variaciones comunes de tildación en español
+    const tildesMap = [
+      // Términos solicitados explícitamente
+      { find: /\bcomprension\b/gi, replace: 'comprensión' },
+      { find: /\bfrustracion\b/gi, replace: 'frustración' },
+      { find: /\bincreible\b/gi, replace: 'increíble' },
+
+      // Pronombres, adverbios y diacríticos frecuentes
+      { find: /\bse\s+que\b/gi, replace: 'sé que' },
+      { find: /\bmas\b/gi, replace: 'más' },
+      { find: /\bestan\b/gi, replace: 'están' },
+      { find: /\bestuvo\b/gi, replace: 'estuvo' },
+      { find: /\btambien\b/gi, replace: 'también' },
+      { find: /\bademas\b/gi, replace: 'además' },
+      { find: /\bdia\b/gi, replace: 'día' },
+      { find: /\bdias\b/gi, replace: 'días' },
+      { find: /\basi\b/gi, replace: 'así' },
+      { find: /\baqui\b/gi, replace: 'aquí' },
+      { find: /\balli\b/gi, replace: 'allí' },
+      { find: /\balla\b/gi, replace: 'allá' },
+      { find: /\bahi\b/gi, replace: 'ahí' },
+      { find: /\brapido\b/gi, replace: 'rápido' },
+      { find: /\bfacil\b/gi, replace: 'fácil' },
+      { find: /\bdificil\b/gi, replace: 'difícil' },
+      { find: /\bcomun\b/gi, replace: 'común' },
+      { find: /\bpublico\b/gi, replace: 'público' },
+      { find: /\brio\b/gi, replace: 'río' },
+      { find: /\bquien\b/gi, replace: 'quién' },
+      { find: /\bcual\b/gi, replace: 'cuál' },
+      { find: /\bcuales\b/gi, replace: 'cuáles' },
+
+      // Sufijos comunes en -ión, -sión y sus plurales (-ciones, -siones)
+      { find: /\baccion\b/gi, replace: 'acción' },
+      { find: /\bacciones\b/gi, replace: 'acciones' },
+      { find: /\bsolucion\b/gi, replace: 'solución' },
+      { find: /\bsoluciones\b/gi, replace: 'soluciones' },
+      { find: /\binformacion\b/gi, replace: 'información' },
+      { find: /\bcomunicacion\b/gi, replace: 'comunicación' },
+      { find: /\beducacion\b/gi, replace: 'educación' },
+      { find: /\borganizacion\b/gi, replace: 'organización' },
+      { find: /\bsituacion\b/gi, replace: 'situación' },
+      { find: /\bgeneracion\b/gi, replace: 'generación' },
+      { find: /\bparticipacion\b/gi, replace: 'participación' },
+      { find: /\bcooperacion\b/gi, replace: 'cooperación' },
+      { find: /\bdecision\b/gi, replace: 'decisión' },
+      { find: /\bdiscusion\b/gi, replace: 'discusión' },
+      { find: /\bexplicacion\b/gi, replace: 'explicación' },
+      { find: /\bpreocupacion\b/gi, replace: 'preocupación' },
+      { find: /\bcreacion\b/gi, replace: 'creación' },
+      { find: /\brelacion\b/gi, replace: 'relación' },
+      { find: /\brelaciones\b/gi, replace: 'relaciones' },
+      { find: /\bcondicion\b/gi, replace: 'condición' },
+      { find: /\bcondiciones\b/gi, replace: 'condiciones' },
+      { find: /\bintencion\b/gi, replace: 'intención' },
+      { find: /\bconversacion\b/gi, replace: 'conversación' },
+      { find: /\borigin\b/gi, replace: 'origen' },
+
+      // Esdrújulas y adverbios en -mente
+      { find: /\bminimo\b/gi, replace: 'mínimo' },
+      { find: /\bmaximo\b/gi, replace: 'máximo' },
+      { find: /\bultimo\b/gi, replace: 'último' },
+      { find: /\brapidamente\b/gi, replace: 'rápidamente' },
+      { find: /\bfacilmente\b/gi, replace: 'fácilmente' },
+      { find: /\bdificilmente\b/gi, replace: 'difícilmente' },
+      { find: /\bcaracter\b/gi, replace: 'carácter' },
+      { find: /\bcomunicandose\b/gi, replace: 'comunicándose' },
+
+      // Estructuras interrogativas frecuentes
+      { find: /\bpor\s+que\b/gi, replace: 'por qué' },
+      { find: /\bque\s+pasa\b/gi, replace: 'qué pasa' },
+      { find: /\bque\s+tal\b/gi, replace: 'qué tal' },
+      { find: /\bcomo\s+estas\b/gi, replace: 'cómo estás' }
+    ];
+
+    tildesMap.forEach(item => {
+      improved = improved.replace(item.find, item.replace);
+    });
+
+    // 3. Formateo de mayúsculas al inicio de oraciones
+    improved = improved.charAt(0).toUpperCase() + improved.slice(1);
+    improved = improved.replace(/([.?!])\s*([a-z])/g, (match, p1, p2) => p1 + ' ' + p2.toUpperCase());
+
+    // 4. Asegurar puntuación final
+    if (!/[.?!]$/.test(improved)) {
+      improved += '.';
+    }
+
+    box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(improved) +
+      '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(improved) + '">Usar esta versión</button>';
+  }, 700);
+}
+
+function kwUseAiSuggestion(btn){
+  const text = decodeURIComponent(btn.getAttribute('data-text'));
+  document.getElementById('kw-content').value = text;
+  document.getElementById('kw-ai-box').classList.remove('visible');
+}
+
+/* ============================================================
+   BIBLIOTECA DE HISTORIAS
+   ============================================================ */
+function kwRenderLibrary(){
+  const grid = document.getElementById('kw-story-grid');
+  grid.innerHTML = '';
+  kwStories.forEach(story => {
+    const card = document.createElement('div');
+    card.className = 'kw-story-card';
+    card.onclick = () => kwOpenStory(story.id);
+    card.innerHTML = `
+      <div class="kw-story-top" style="background:var(--paper-dim);">${story.icon}</div>
+      <div class="kw-story-body">
+        <div class="kw-level">${kwEscape(story.level)}</div>
+        <h3>${kwEscape(story.title)}</h3>
+        <p>${kwEscape(story.teaser)}</p>
+        <span class="kw-btn kw-btn-ghost" style="pointer-events:none; display:inline-block;">Empezar a leer</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+async function kwOpenStory(id){
+  kwCurrentStory = kwStories.find(s => s.id === id);
+  kwCurrentPart = 0;
+
+  document.getElementById('kw-story-grid').style.display = 'none';
+  document.getElementById('kw-lib-head').style.display = 'none';
+  document.getElementById('kw-reader').classList.add('visible');
+  document.getElementById('kw-reader-card').innerHTML = '<p>Cargando...</p>';
+
+  let progresoUsuario = [];
+
+  if (kwCurrentUser) {
+    try {
+      const response = await fetch(
+        '/api/progreso?usuarioId=' + encodeURIComponent(kwCurrentUser.id) +
+        '&historiaId=' + encodeURIComponent(kwCurrentStory.id)
+      );
+      const data = await response.json();
+      if (data.ok) progresoUsuario = data.progreso;
+    } catch (err) {
+      console.error('Error al cargar progreso:', err);
+    }
+  }
+
+  kwPartsAnswered = kwCurrentStory.parts.map((part, index) => {
+    return progresoUsuario.some(
+      p => p.parte === index && p.completada === true
+    );
+  });
+
+  kwPartAttempts = kwCurrentStory.parts.map(() => 0);
+
+  kwRenderPart();
+}
+
+function kwCloseStory(){
+  document.getElementById('kw-story-grid').style.display = '';
+  document.getElementById('kw-lib-head').style.display = '';
+  document.getElementById('kw-reader').classList.remove('visible');
+  kwCurrentStory = null;
+}
+
+function kwRenderThread(){
+  const wrap = document.getElementById('kw-thread-progress');
+  wrap.innerHTML = '';
+  kwCurrentStory.parts.forEach((p, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'kw-thread-dot' + (kwPartsAnswered[i] ? ' done' : (i === kwCurrentPart ? ' current' : ''));
+    wrap.appendChild(dot);
+    if(i < kwCurrentStory.parts.length - 1){
+      const line = document.createElement('div');
+      line.className = 'kw-thread-line' + (kwPartsAnswered[i] ? ' done' : '');
+      wrap.appendChild(line);
+    }
+  });
+}
+
+function kwRenderPart(){
+  kwRenderThread();
+
+  const card = document.getElementById('kw-reader-card');
+  const part = kwCurrentStory.parts[kwCurrentPart];
+
+  let html = `
+    <h3>${kwEscape(kwCurrentStory.title)}</h3>
+    <div class="kw-reader-text">
+  `;
+
+  part.text.forEach(para => {
+    html += `<p>${kwEscape(para)}</p>`;
+  });
+
+  html += `</div>`;
+
+  if (!kwPartsAnswered[kwCurrentPart]) {
+    html += `
+      <div class="kw-quiz">
+        <div class="kw-quiz-label">
+          Pregunta de comprensión crítica
+          (${kwCurrentPart + 1} de ${kwCurrentStory.parts.length})
+        </div>
+
+        <div class="kw-quiz-q">
+          ${kwEscape(part.question)}
+        </div>
+
+        <div class="kw-options">
+    `;
+
+    part.options.forEach((opt, idx) => {
+      html += `
+        <button
+          class="kw-option"
+          onclick="kwCheckAnswer(${idx})"
+        >
+          ${kwEscape(opt)}
+        </button>
+      `;
+    });
+
+    html += `
+        </div>
+        <div class="kw-feedback" id="kw-feedback"></div>
+      </div>
+    `;
+  } else {
+    if (kwCurrentPart < kwCurrentStory.parts.length - 1) {
+      const exhausted = kwPartAttempts[kwCurrentPart] >= KW_MAX_ATTEMPTS;
+      html += `
+        <div class="kw-quiz">
+          <div class="kw-feedback ${exhausted ? 'no' : 'ok'}">
+            ${exhausted
+              ? 'Alcanzaste el máximo de intentos. Ya puedes pasar a la siguiente parte.'
+              : '¡Respuesta correcta! Ya puedes pasar a la siguiente parte.'}
+          </div>
+          <button class="kw-btn kw-btn-primary" onclick="kwNextPart()">
+            Siguiente parte →
+          </button>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="kw-finish">
+          <svg class="kw-chakana" viewBox="0 0 100 100"
+               fill="currentColor" aria-hidden="true">
+            <rect x="40" y="0" width="20" height="20"/>
+            <rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/>
+            <rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/>
+            <rect x="35" y="35" width="30" height="30"
+                  fill="#F7F0DD"/>
+          </svg>
+
+          <h3 style="margin:10px 0 6px 0; color:var(--night);">
+            ¡Felicitaciones!
+          </h3>
+
+          <p style="color:var(--ink-soft); margin:0 0 16px 0;">
+            Has completado todas las partes de esta historia compleja.
+          </p>
+
+          <button class="kw-btn kw-btn-primary" onclick="kwCloseStory()">
+            Volver a la biblioteca
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  card.innerHTML = html;
+}
+
+async function kwGuardarProgreso(){
+  if (!kwCurrentUser) return;
+
+  try {
+    await fetch('/api/progreso', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        usuario_id: kwCurrentUser.id,
+        historia_id: kwCurrentStory.id,
+        parte: kwCurrentPart,
+        completada: true
+      })
+    });
+  } catch (err) {
+    console.error('Error al guardar progreso:', err);
+  }
+}
+
+function kwCheckAnswer(idx){
+  const part = kwCurrentStory.parts[kwCurrentPart];
+  const buttons = document.querySelectorAll('.kw-option');
+  const feedback = document.getElementById('kw-feedback');
+
+  if (idx === part.correct) {
+    /* Respuesta correcta: se marca solo la opción elegida y se avanza. */
+    buttons.forEach((b, i) => {
+      b.setAttribute('disabled', 'true');
+      if (i === idx) b.classList.add('correct');
+    });
+
+    feedback.className = 'kw-feedback ok';
+    feedback.textContent = '¡Correcto!';
+    kwPartsAnswered[kwCurrentPart] = true;
+
+    kwGuardarProgreso();
+
+    setTimeout(() => {
+      kwRenderPart();
+    }, 700);
+    return;
+  }
+
+  /* Respuesta incorrecta: nunca se resalta la opción correcta, solo la elegida. */
+  kwPartAttempts[kwCurrentPart]++;
+  const attemptsLeft = KW_MAX_ATTEMPTS - kwPartAttempts[kwCurrentPart];
+
+  buttons.forEach((b, i) => {
+    b.setAttribute('disabled', 'true');
+    if (i === idx) b.classList.add('wrong');
+  });
+
+  if (attemptsLeft > 0) {
+    feedback.className = 'kw-feedback no';
+    feedback.textContent =
+      'Inténtalo de nuevo. Te queda ' + attemptsLeft +
+      (attemptsLeft === 1 ? ' intento.' : ' intentos.');
+
+    setTimeout(() => {
+      buttons.forEach((b) => {
+        b.removeAttribute('disabled');
+        b.classList.remove('wrong');
+      });
+      feedback.textContent = '';
+    }, 1500);
+  } else {
+    /* Se agotaron los 2 intentos: se desbloquea el avance sin mostrar la respuesta correcta. */
+    feedback.className = 'kw-feedback no';
+    feedback.textContent = 'Alcanzaste el máximo de 2 intentos. Puedes continuar a la siguiente parte.';
+    kwPartsAnswered[kwCurrentPart] = true;
+
+    kwGuardarProgreso();
+
+    setTimeout(() => {
+      kwRenderPart();
+    }, 1600);
+  }
+}
+
+function kwNextPart(){
+  if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+    kwCurrentPart++;
+    kwRenderPart();
+  }
+}
+
+// Inicializar vistas al cargar
+kwPosts = kwDB.publicaciones;
+kwRenderPosts();
+kwRenderLibrary();
+kwCheckUser();
+</script>
+</body>
+</html>

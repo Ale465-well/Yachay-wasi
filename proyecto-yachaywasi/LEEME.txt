@@ -1,0 +1,75 @@
+CÓMO PUBLICAR YACHAY WASI CON PROFESORES, ALUMNOS Y CORREO
+============================================================
+
+Esta carpeta contiene:
+  - index.html               → tu página web completa
+  - api/mejorar-ia.js         → corrige tildes/redacción con OpenAI
+  - api/usuarios.js           → crea/ingresa profesores y estudiantes (Vercel KV)
+  - api/alumnos.js            → lista de alumnos de un profesor + su progreso
+  - api/progreso.js           → guarda y consulta el avance en las historias
+  - api/enviar-registro.js    → envía el registro de alumnos al correo del profesor
+  - package.json              → dependencias (@vercel/kv, nodemailer)
+  - vercel.json                → configuración del proyecto
+
+Ahora la "base de datos" ya NO vive en el navegador (localStorage),
+vive en Vercel KV (almacenamiento en la nube de Vercel), así que
+funciona sin importar desde qué celular o computadora entre cada
+alumno.
+
+Necesitas configurar 3 cosas en Vercel: OpenAI, Vercel KV, y Gmail.
+
+PASOS:
+
+1. Sube esta carpeta a Vercel (arrastrando la carpeta como ya hiciste
+   antes, con "choose a folder", o por GitHub si prefieres).
+
+2. Crea la base de datos (Vercel KV):
+   - Dentro de tu proyecto en Vercel, ve a la pestaña "Storage".
+   - Dale a "Create Database" → elige "KV" (o "Upstash for Redis",
+     es lo mismo, es gratis en el plan Hobby).
+   - Sigue los pasos y conéctala a tu proyecto ("Connect Project").
+   - Esto agrega automáticamente las variables de entorno que
+     @vercel/kv necesita (KV_REST_API_URL, KV_REST_API_TOKEN, etc.)
+     — no tienes que copiarlas a mano.
+
+3. Configura tu correo de Gmail para el envío:
+   - Entra a tu cuenta de Gmail → https://myaccount.google.com/security
+   - Activa la "Verificación en 2 pasos" si no la tienes activada
+     (Gmail lo exige para poder crear una "contraseña de aplicación").
+   - Busca "Contraseñas de aplicaciones" (App Passwords), crea una
+     nueva (elige "Otra" y ponle un nombre como "Yachay Wasi").
+     Te dará un código de 16 letras — cópialo.
+
+4. En Vercel, ve a Settings → Environment Variables y agrega:
+     GMAIL_USER          = tu correo completo de Gmail
+     GMAIL_APP_PASSWORD  = el código de 16 letras del paso 3
+     OPENAI_API_KEY      = tu API key de OpenAI (si aún no la agregaste)
+
+5. Ve a la pestaña "Deployments", entra a los tres puntitos (...) del
+   despliegue más reciente y dale a "Redeploy" para que tome las
+   nuevas variables.
+
+6. Prueba el flujo completo:
+   - Crea una cuenta de profesor/a (con correo y clave). Verás tu
+     código de clase (ej. YW-4X7B) en la pestaña "Panel del
+     profesor/a".
+   - Desde otro dispositivo (o pestaña de incógnito), crea una
+     cuenta de estudiante usando ese código de clase.
+   - El estudiante lee una historia y responde las preguntas
+     (máximo 2 intentos por pregunta).
+   - Vuelve a la cuenta de profesor/a → pestaña "Panel del
+     profesor/a" → deberías ver al alumno y sus partes completadas.
+   - Dale a "Enviar registro a mi correo" y revisa la bandeja de
+     entrada del correo que usaste al crear la cuenta de profesor.
+
+IMPORTANTE:
+- La clave del profesor se guarda en Vercel KV en texto plano (sin
+  encriptar). Está bien para un proyecto escolar/demo, pero no
+  sería apropiado para un sistema con datos realmente sensibles.
+- El "Tablón de la comunidad" (los cuentos que publican los
+  estudiantes) todavía vive en localStorage de cada navegador, NO
+  se migró a Vercel KV. Si quieres que también sea compartido entre
+  dispositivos, se puede hacer después con el mismo enfoque.
+- Nunca subas tu API key de OpenAI ni tu contraseña de aplicación de
+  Gmail a un repositorio público de GitHub — solo van en las
+  Environment Variables de Vercel.
